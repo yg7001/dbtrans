@@ -4,9 +4,9 @@ A Clojure program to transport data from Oracle database to HAWQ
 
 ## Usage
 
--1,clone to local
--2,edit config.edu , setting up your database info
--3,lein run
+- 1,clone to local
+- 2,edit config.edu , setting up your database info
+- 3,lein run
 
 ## License
 
