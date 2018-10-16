@@ -1,0 +1,56 @@
+<configuration debug="false"> 
+    <contextName>DbTrans</contextName>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">    
+        <encoder>     
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] [%logger{36}] - %msg%n</pattern>   
+        </encoder>  
+    </appender>   
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">   
+       <filter class="ch.qos.logback.classic.filter.LevelFilter">        
+            <!-- ERROR 以外级别的日志 -->   
+           <level>ERROR</level>            
+           <onMatch>DENY</onMatch>         
+           <onMismatch>ACCEPT</onMismatch>     
+       </filter>       
+       <encoder>           
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] [%logger{36}] - %msg%n</pattern>
+       </encoder> 
+       <!-- Size and time based archiving -->       
+       <rollingPolicy class = "ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">            
+            <fileNamePattern>${user.dir}\logs\dbtrans.%d.%i.log</fileNamePattern>            
+            <maxFileSize>10MB</maxFileSize>           
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>              
+       </rollingPolicy>
+    </appender>  
+    <appender name="ERR" class="ch.qos.logback.core.rolling.RollingFileAppender" level="error">   
+       <filter class="ch.qos.logback.classic.filter.LevelFilter">  
+           <!-- 仅仅记录 ERROR 级别的日志 -->         
+           <level>ERROR</level>            
+           <onMatch>ACCEPT</onMatch>         
+           <onMismatch>DENY</onMismatch>     
+       </filter>       
+       <encoder>           
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%thread] [%logger{36}] - %msg%n</pattern>
+       </encoder>
+ 
+       <!-- Size and time based archiving -->       
+       <rollingPolicy class = "ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">            
+            <fileNamePattern>${user.dir}\logs\dbtrans.err.%d.%i.log</fileNamePattern>            
+            <maxFileSize>10MB</maxFileSize>           
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>                           
+       </rollingPolicy>
+    </appender>    
+
+    <logger name="com.mchange" level="WARN">
+        <appender-ref ref="CONSOLE"/>    
+        <appender-ref ref="FILE"/>  
+        <appender-ref ref="ERR"/>
+    </logger>
+    <root level="debug">    
+        <appender-ref ref="CONSOLE"/>    
+        <appender-ref ref="FILE"/>  
+        <appender-ref ref="ERR"/>
+    </root>
+</configuration>

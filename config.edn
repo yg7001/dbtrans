@@ -1,0 +1,6 @@
+{:author "Gu Zhigang" :create-at "2018-09-14" :update-at "2018-10-09"
+ :db-pg {:user "username" :pass "userpass" :host "192.168.58.15" :port 5432 :db "yourdb"}
+ :db-ora {:user "user1" :pass "yourpass" :host "192.168.0.82" :port 1521 :db "oracle servcie name"} 
+ :trans {:interval "1 hour" :max-days 7 :tmp-path "tmp"} 
+ :logging {:path "log" :level "debug"}
+}
